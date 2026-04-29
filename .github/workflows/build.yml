@@ -1,0 +1,17 @@
+name: Build APK
+on:
+ push:
+ branches: [main]
+jobs:
+ build:
+ runs-on: ubuntu-latest
+ container:
+ image: kivy/buildozer
+ steps:
+ - uses: actions/checkout@v4
+ - name: Build APK
+ run: buildozer android debug
+ - uses: actions/upload-artifact@v4
+ with:
+ name: bird-detector-apk
+ path: bin/*.apk
